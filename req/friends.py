@@ -122,9 +122,10 @@ def _get_age_from_birthdate(birthdate: str) -> Optional[int]:
 
     Ignores day and month of birth in calculation.
     """
-    if not re.match(r'\d{1,2}\.\d{1,2}\.\d{4}$', birthdate):
+    match = re.match(r'\d{1,2}\.\d{1,2}\.(\d{4})$', birthdate)
+    if not match:
         return None
-    birthyear = int(birthdate[-4:])
+    birthyear = int(match.group(1))
     age = date.today().year - birthyear
     return age
 
