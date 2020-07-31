@@ -1,7 +1,8 @@
 def calculate(data, findall):
-    matches = findall(r"")  # Если придумать хорошую регулярку, будет просто
-    for v1, s, v2, n in matches:  # Если кортеж такой структуры: var1, [sign]=, [var2], [[+-]number]
-        # Если бы могло быть только =, вообще одной строкой все считалось бы, вот так:
-        data[v1] = data.get(v2, 0) + int(n or 0)
-
+    matches = findall(r"([abc])([-+]?)=([abc]?)([-+]?\d*)")
+    for v1, sign, v2, number in matches:
+        tmp = data.get(v2, 0) + int(number or 0)
+        if sign:
+            tmp = data[v1] + int(sign + '1') * tmp
+        data[v1] = tmp
     return data
