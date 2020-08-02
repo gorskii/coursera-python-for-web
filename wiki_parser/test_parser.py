@@ -4,7 +4,7 @@
 
 import unittest
 
-from .parser import parse, build_bridge, get_statistics
+from wiki_parser.parser import parse, build_bridge, get_statistics
 
 STATISTICS = {
     'Artificial_intelligence': [8, 19, 13, 198],

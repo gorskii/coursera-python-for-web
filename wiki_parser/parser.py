@@ -1,3 +1,5 @@
+import re
+
 from bs4 import BeautifulSoup
 
 
@@ -13,6 +15,11 @@ def parse(path_to_file):
         if width:
             if int(width) >= 200:
                 imgs += 1
+
+    # Count headers where first letter of inner text is in ('E', 'T', 'C')
+    for header in content.find_all(re.compile(r'h[1-6]')):
+        if header.text[0] in ('E', 'T', 'C'):
+            headers += 1
 
     return [imgs, headers, linkslen, lists]
 
