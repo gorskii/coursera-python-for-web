@@ -21,6 +21,17 @@ def parse(path_to_file):
         if header.text[0] in ('E', 'T', 'C'):
             headers += 1
 
+    # Count maximum link sequence length where there is no other tags
+    # between links
+    for link in content.find_all('a'):
+        current_sequence_length = 0
+        current_element = link
+        while current_element and current_element.name == 'a':
+            current_sequence_length += 1
+            current_element = current_element.find_next_sibling()
+        if current_sequence_length > linkslen:
+            linkslen = current_sequence_length
+
     return [imgs, headers, linkslen, lists]
 
 
