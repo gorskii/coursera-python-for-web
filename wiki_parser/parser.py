@@ -2,11 +2,18 @@ from bs4 import BeautifulSoup
 
 
 def parse(path_to_file):
-    # Поместите ваш код здесь.
-    # ВАЖНО!!!
-    # При открытии файла, добавьте в функцию open необязательный параметр
-    # encoding='utf-8', его отсутствие в коде будет вызвать падение вашего
-    # решения на грейдере с ошибкой UnicodeDecodeError
+    imgs = headers = linkslen = lists = 0
+
+    with open(path_to_file, mode='r', encoding='utf-8') as file:
+        content = BeautifulSoup(file, 'html.parser').find(id='bodyContent')
+
+    # Count images where width >= 200
+    for img in content.find_all('img'):
+        width = img.get('width')
+        if width:
+            if int(width) >= 200:
+                imgs += 1
+
     return [imgs, headers, linkslen, lists]
 
 
