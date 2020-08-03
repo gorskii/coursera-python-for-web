@@ -10,11 +10,7 @@ def parse(path_to_file):
         content = BeautifulSoup(file, 'html.parser').find(id='bodyContent')
 
     # Count images where width >= 200
-    for img in content.find_all('img'):
-        width = img.get('width')
-        if width:
-            if int(width) >= 200:
-                imgs += 1
+    imgs = len(content.find_all('img', width=lambda x: x and int(x) >= 200))
 
     # Count headers where first letter of inner text is in ('E', 'T', 'C')
     for header in content.find_all(re.compile(r'h[1-6]')):
