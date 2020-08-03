@@ -28,6 +28,14 @@ def parse(path_to_file):
         if current_sequence_length > linkslen:
             linkslen = current_sequence_length
 
+    # Count number of unnested <ul> and <ol> lists
+    # Using descendants iterator and lambda for a faster search
+    list_tags = ('ul', 'ol')
+    for element in content.descendants:
+        if element.name in list_tags:
+            if not element.find_parent(lambda x: x.name in list_tags):
+                lists += 1
+
     return [imgs, headers, linkslen, lists]
 
 
