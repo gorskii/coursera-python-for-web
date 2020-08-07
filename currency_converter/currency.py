@@ -28,8 +28,7 @@ def convert(
 
     response = requests.get(url)
     response.raise_for_status()
-    exchange_rate_data = BeautifulSoup(response.text, 'html.parser')
-    print(exchange_rate_data)
+    exchange_rate_data = BeautifulSoup(response.content, 'xml')
 
     if cur_from == intermediate_currency_code:
         source_rate = Decimal('1.0')
@@ -50,8 +49,8 @@ def get_cbr_rate(
 ) -> Decimal:
     """Get currency rate from CBR exchange market xml."""
     currency_data = exchange_rate_data.find(
-        'charcode', text=currency_code
-    ).find_parent('valute')
-    denomination_rate = int(currency_data.find('nominal').text)
-    rate = Decimal(currency_data.find('value').text.replace(',', '.'))
+        'CharCode', text=currency_code
+    ).find_parent('Valute')
+    denomination_rate = int(currency_data.Nominal.string)
+    rate = Decimal(currency_data.Value.string.replace(',', '.'))
     return rate / denomination_rate
