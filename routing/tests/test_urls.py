@@ -1,6 +1,7 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve, NoReverseMatch
-from routing.views import simple_route, slug_route
+
+from routing.views import simple_route, slug_route, sum_route
 
 
 class TestSimpleRouteUrls(SimpleTestCase):
@@ -27,3 +28,23 @@ class TestSlugRouteUrls(SimpleTestCase):
             with self.subTest(case=slug):
                 with self.assertRaises(NoReverseMatch):
                     url = reverse('routing:slug_route', args=[slug])
+
+
+class TestSumRouteUrls(SimpleTestCase):
+    """Test urls resolving sum_route path"""
+
+    def test_sum_route_resolves(self):
+        url = reverse(
+            'routing:sum_route', kwargs={'first': '1', 'second': '-2'}
+        )
+        self.assertEqual(resolve(url).func, sum_route)
+
+    def test_invalid_sum_route_raises_no_reverse_match(self):
+        invalid_kwargs = (
+            {'first': '1', 'second': 'b'},
+            {'first': 'a', 'second': '2'},
+        )
+        for kwargs in invalid_kwargs:
+            with self.subTest(case=kwargs):
+                with self.assertRaises(NoReverseMatch):
+                    reverse('routing:sum_route', kwargs=kwargs)

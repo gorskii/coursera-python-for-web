@@ -14,3 +14,9 @@ def simple_route(request):
 def slug_route(request, slug):
     """Return slug"""
     return HttpResponse(slug, status=200)
+
+
+def sum_route(request, first, second):
+    """Return first + second"""
+    result = int(first) + int(second)
+    return HttpResponse(result, status=200)

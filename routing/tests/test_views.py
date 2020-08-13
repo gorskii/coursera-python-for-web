@@ -50,3 +50,23 @@ class TestSlugRouteView(SimpleTestCase):
                 url = f'/routing/slug_route/{slug}'
                 response = self.client.post(url)
                 self.assertEqual(response.status_code, 404)
+
+
+class TestSumRouteView(SimpleTestCase):
+    """Test sum_route view"""
+
+    def test_get_sum_route_with_two_positive_numbers(self):
+        url = reverse(
+            'routing:sum_route', kwargs={'first': '1', 'second': '2'}
+        )
+        expected = '3'
+        response = self.client.get(url)
+        self.assertEqual(response.content.decode(), expected)
+
+    def test_get_sum_route_with_one_negative_number(self):
+        url = reverse(
+            'routing:sum_route', kwargs={'first': '1', 'second': '-2'}
+        )
+        expected = '-1'
+        response = self.client.get(url)
+        self.assertEqual(response.content.decode(), expected)
