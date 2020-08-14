@@ -1,7 +1,13 @@
 from django.test import SimpleTestCase
 from django.urls import reverse, resolve, NoReverseMatch
 
-from routing.views import simple_route, slug_route, sum_route, sum_get_method
+from routing.views import (
+    simple_route,
+    slug_route,
+    sum_route,
+    sum_get_method,
+    sum_post_method,
+)
 
 
 class TestSimpleRouteUrls(SimpleTestCase):
@@ -56,3 +62,11 @@ class TestSumGetMethodUrls(SimpleTestCase):
     def test_sum_get_method_resolves(self):
         url = reverse('routing:sum_get_method')
         self.assertEqual(resolve(url).func, sum_get_method)
+
+
+class TestSumPostMethodUrls(SimpleTestCase):
+    """Test urls resolving sum_post_method path"""
+
+    def test_sum_post_method_resolves(self):
+        url = reverse('routing:sum_post_method')
+        self.assertEqual(resolve(url).func, sum_post_method)

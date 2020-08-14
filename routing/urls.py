@@ -1,6 +1,12 @@
 from django.conf.urls import url
 
-from routing.views import simple_route, slug_route, sum_route, sum_get_method
+from routing.views import (
+    simple_route,
+    slug_route,
+    sum_route,
+    sum_get_method,
+    sum_post_method,
+)
 
 app_name = 'routing'
 
@@ -10,4 +16,5 @@ urlpatterns = [
     url(r'^sum_route/(?P<first>-?\d+)/(?P<second>-?\d+)/$',
         sum_route, name='sum_route'),
     url(r'^sum_get_method/', sum_get_method, name='sum_get_method'),
+    url(r'^sum_post_method/', sum_post_method, name='sum_post_method'),
 ]

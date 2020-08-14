@@ -113,3 +113,46 @@ class TestSumGetMethodView(SimpleTestCase):
             with self.subTest(case=case):
                 request = request_method(self.url, {'a': '1', 'b': '2'})
                 self.assertEqual(request.status_code, 405)
+
+
+class TestSumPostMethod(SimpleTestCase):
+    """Test sum_post_method view"""
+
+    def setUp(self) -> None:
+        self.url = reverse('routing:sum_post_method')
+
+    def test_post_sum_with_two_positive_numbers(self):
+        response = self.client.post(self.url, {'a': '1', 'b': '2'})
+        expected = '3'
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode(), expected)
+
+    def test_post_sum_with_one_negative_number(self):
+        response = self.client.post(self.url, {'a': '1', 'b': '-2'})
+        expected = '-1'
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode(), expected)
+
+    def test_post_sum_with_invalid_arguments_returns_bad_request(self):
+        cases = (
+            {'a': '1', 'b': 'b'},
+            {'a': 'a', 'b': '2'}
+        )
+        for case in cases:
+            with self.subTest(case=case):
+                response = self.client.post(self.url, case)
+                self.assertEqual(response.status_code, 400)
+
+    def test_post_sum_with_no_arguments_returns_bad_request(self):
+        response = self.client.post(self.url)
+        self.assertEqual(response.status_code, 400)
+
+    def test_post_sum_with_invalid_methods_returns_not_allowed(self):
+        cases = (
+            ('get', self.client.get),
+            ('put', self.client.put),
+        )
+        for case, request_method in cases:
+            with self.subTest(case=case):
+                request = request_method(self.url, {'a': '1', 'b': '2'})
+                self.assertEqual(request.status_code, 405)
