@@ -1,3 +1,5 @@
+"""Simple routes for week 4 routing practice task."""
+
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_safe, require_POST
@@ -7,7 +9,7 @@ from django.views.decorators.http import require_safe, require_POST
 def simple_route(request):
     """Return empty response.
 
-    Only GET method allowed, so using @require_safe decorator.
+    Only GET method allowed, so @require_safe decorator is used.
     """
     return HttpResponse(status=200)
 
@@ -27,7 +29,7 @@ def sum_route(request, first, second):
 def sum_get_method(request):
     """Return a + b. a and b passed through request.GET attributes.
 
-    Only GET method allowed, so using @require_safe decorator.
+    Only GET method allowed, so @require_safe decorator is used.
     """
     try:
         a = request.GET['a']
@@ -49,9 +51,9 @@ def sum_get_method(request):
 def sum_post_method(request):
     """Return a + b. a and b passed through request.POST attributes.
 
-    Only POST method allowed, so using @require_POST decorator.
+    Only POST method allowed, so @require_POST decorator is used.
 
-    Add @csrf_exempt decorator to allow requests without X-CSRFToken
+    @csrf_exempt decorator is used to allow requests without X-CSRFToken
     header or CSRF token cookie.
     """
     try:
