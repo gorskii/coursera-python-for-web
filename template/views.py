@@ -1,10 +1,8 @@
 from django.shortcuts import render
 
 
-# Create your views here.
-
 def echo(request):
-    pass
+    return render(request, 'echo.html')
 
 
 def filters(request):
