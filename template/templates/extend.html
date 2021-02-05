@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block block_a %}
+    {{ block.super }}
+    {% if a %}
+        {{ a }}
+    {% endif %}
+{% endblock block_a %}
+
+{% block block_b %}
+    {{ block.super }}
+    {% if b %}
+        {{ b }}
+    {% endif %}
+{% endblock block_b %}
