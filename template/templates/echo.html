@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>Echo page</title>
+</head>
+<body>
+{% if a or b or c or d %}
+    {{ request.method|lower }}
+{% endif %}
+{% if a %}
+    a: {{ a }}
+{% endif %}
+{% if b %}
+    b: {{ b }}
+{% endif %}
+{% if c %}
+    c: {{ c }}
+{% endif %}
+{% if d %}
+    d: {{ d }}
+{% endif %}
+statement is
+{% if statement_header %}
+    {{ statement_header }}
+{% else %}
+    empty
+{% endif %}
+</body>
+</html>
