@@ -44,7 +44,10 @@ def delete_u1():
 
 
 def unsubscribe_u2_from_blogs():
-    pass
+    """Unsubscribe user with first_name 'u2' from blogs"""
+    user = User.objects.get(first_name='u2')
+    user.subscriptions = []
+    user.save()
 
 
 def get_topic_created_grated():

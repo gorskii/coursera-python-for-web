@@ -4,7 +4,13 @@ from django.test import TestCase
 from pytz import UTC
 
 from db.models import User, Blog, Topic
-from db.query import create, edit_all, edit_u1_u2, delete_u1
+from db.query import (
+    create,
+    edit_all,
+    edit_u1_u2,
+    delete_u1,
+    unsubscribe_u2_from_blogs,
+)
 
 
 class TestQuery(TestCase):
@@ -72,3 +78,19 @@ class TestQuery(TestCase):
 
         self.assertEqual(User.objects.count(), 2)
         self.assertEqual(User.objects.filter(first_name='u1').count(), 0)
+
+    def test_unsubscribe_u2_from_blogs(self):
+        unsubscribe_u2_from_blogs()
+
+        user = User.objects.get(first_name='u2')
+        self.assertEqual(
+            user.subscriptions.count(), 0
+        )
+        self.assertNotIn(
+            user,
+            list(Blog.objects.get(title='blog1').subscribers.all())
+        )
+        self.assertNotIn(
+            user,
+            list(Blog.objects.get(title='blog2').subscribers.all())
+        )
