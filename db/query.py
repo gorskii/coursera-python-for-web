@@ -28,7 +28,8 @@ def create():
 
 
 def edit_all():
-    pass
+    """Change first_name to 'uu1' for all users"""
+    User.objects.all().update(first_name='uu1')
 
 
 def edit_u1_u2():

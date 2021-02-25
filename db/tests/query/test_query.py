@@ -4,14 +4,16 @@ from django.test import TestCase
 from pytz import UTC
 
 from db.models import User, Blog, Topic
-from db.query import create
+from db.query import create, edit_all
 
 
 class TestQuery(TestCase):
     """Test query module functions"""
 
-    def test_create(self):
+    def setUp(self):
         create()
+
+    def test_create(self):
         u1 = User.objects.get(first_name='u1', last_name='u1')
         self.assertTrue(u1)
         u2 = User.objects.get(first_name='u2', last_name='u2')
@@ -42,3 +44,13 @@ class TestQuery(TestCase):
             [u1, u2, u3],
             list(Topic.objects.get(title='topic1').likes.all())
         )
+
+    def test_edit_all(self):
+        edit_all()
+
+        self.assertEqual(User.objects.filter(first_name='u1').count(), 0)
+        self.assertEqual(User.objects.count(), 3)
+
+        self.assertTrue(User.objects.get(first_name='uu1', last_name='u1'))
+        self.assertTrue(User.objects.get(first_name='uu1', last_name='u2'))
+        self.assertTrue(User.objects.get(first_name='uu1', last_name='u3'))
