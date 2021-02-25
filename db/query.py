@@ -33,7 +33,9 @@ def edit_all():
 
 
 def edit_u1_u2():
-    pass
+    """Change first_name to 'uu1' for users
+    who have first_name 'u1' or 'u2'"""
+    User.objects.filter(first_name__in=('u1', 'u2')).update(first_name='uu1')
 
 
 def delete_u1():
