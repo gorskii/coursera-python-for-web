@@ -4,7 +4,7 @@ from django.test import TestCase
 from pytz import UTC
 
 from db.models import User, Blog, Topic
-from db.query import create, edit_all, edit_u1_u2
+from db.query import create, edit_all, edit_u1_u2, delete_u1
 
 
 class TestQuery(TestCase):
@@ -66,3 +66,9 @@ class TestQuery(TestCase):
         self.assertTrue(User.objects.get(first_name='uu1', last_name='u1'))
         self.assertTrue(User.objects.get(first_name='uu1', last_name='u2'))
         self.assertTrue(User.objects.get(first_name='u3', last_name='u3'))
+
+    def test_delete_u1(self):
+        delete_u1()
+
+        self.assertEqual(User.objects.count(), 2)
+        self.assertEqual(User.objects.filter(first_name='u1').count(), 0)

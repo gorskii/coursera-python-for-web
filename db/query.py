@@ -39,7 +39,8 @@ def edit_u1_u2():
 
 
 def delete_u1():
-    pass
+    """Delete user with first_name 'u1'"""
+    User.objects.filter(first_name='u1').delete()
 
 
 def unsubscribe_u2_from_blogs():
