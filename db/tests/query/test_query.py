@@ -12,6 +12,7 @@ from db.query import (
     unsubscribe_u2_from_blogs,
     get_topic_created_grated,
     get_topic_title_ended,
+    get_user_with_limit,
 )
 
 
@@ -104,3 +105,11 @@ class TestQuery(TestCase):
 
     def test_get_topic_title_ended(self):
         self.assertTrue(get_topic_title_ended().title.endswith('content'))
+
+    def test_get_user_with_limit(self):
+        u2 = User.objects.get(id=2)
+        u3 = User.objects.get(id=3)
+        self.assertEqual(
+            [u3, u2],
+            get_user_with_limit()
+        )

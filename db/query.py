@@ -63,7 +63,8 @@ def get_topic_title_ended():
 
 
 def get_user_with_limit():
-    pass
+    """Sort users in reverse order by id and return the first two"""
+    return list(User.objects.order_by('-id')[:2])
 
 
 def get_topic_count():
