@@ -51,7 +51,10 @@ def unsubscribe_u2_from_blogs():
 
 
 def get_topic_created_grated():
-    pass
+    """Return topics that have creation date greater than 2018-01-01"""
+    return list(
+        Topic.objects.filter(created__gt=datetime(2018, 1, 1, tzinfo=UTC))
+    )
 
 
 def get_topic_title_ended():

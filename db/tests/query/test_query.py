@@ -10,6 +10,7 @@ from db.query import (
     edit_u1_u2,
     delete_u1,
     unsubscribe_u2_from_blogs,
+    get_topic_created_grated,
 )
 
 
@@ -94,3 +95,8 @@ class TestQuery(TestCase):
             user,
             list(Blog.objects.get(title='blog2').subscribers.all())
         )
+
+    def test_get_topic_created_grated(self):
+        topics = get_topic_created_grated()
+        for topic in topics:
+            self.assertGreater(topic.created, datetime(2018, 1, 1, tzinfo=UTC))
