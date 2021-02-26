@@ -58,7 +58,8 @@ def get_topic_created_grated():
 
 
 def get_topic_title_ended():
-    pass
+    """Return a topic whose title ends with 'content'"""
+    return Topic.objects.get(title__endswith='content')
 
 
 def get_user_with_limit():
