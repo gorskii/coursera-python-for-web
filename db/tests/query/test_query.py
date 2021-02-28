@@ -13,6 +13,7 @@ from db.query import (
     get_topic_created_grated,
     get_topic_title_ended,
     get_user_with_limit,
+    get_topic_count,
 )
 
 
@@ -112,4 +113,12 @@ class TestQuery(TestCase):
         self.assertEqual(
             [u3, u2],
             get_user_with_limit()
+        )
+
+    def test_get_topic_count(self):
+        blog1_topic_count = Topic.objects.filter(blog_id=1).count()
+        blog2_topic_count = Topic.objects.filter(blog_id=2).count()
+        self.assertEqual(
+            [blog.topic_count for blog in get_topic_count()],
+            sorted([blog1_topic_count, blog2_topic_count])
         )

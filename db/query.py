@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.db.models import Count
 from pytz import UTC
 
 from db.models import User, Blog, Topic
@@ -68,7 +69,12 @@ def get_user_with_limit():
 
 
 def get_topic_count():
-    pass
+    """Return sorted topic counts for each blog"""
+    return list(
+        Blog.objects
+            .annotate(topic_count=Count('topic'))
+            .order_by('topic_count')
+    )
 
 
 def get_avg_topic_count():
