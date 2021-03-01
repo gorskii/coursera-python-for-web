@@ -94,8 +94,8 @@ def get_blog_that_have_more_than_one_topic():
 
 
 def get_topic_by_u1():
-    pass
-
+    """Return topics created by user with first_name u1"""
+    return list(Topic.objects.filter(author__first_name='u1'))
 
 def get_user_that_dont_have_blog():
     pass

@@ -17,6 +17,7 @@ from db.query import (
     get_topic_count,
     get_avg_topic_count,
     get_blog_that_have_more_than_one_topic,
+    get_topic_by_u1,
 )
 
 
@@ -142,3 +143,7 @@ class TestQuery(TestCase):
             get_blog_that_have_more_than_one_topic(),
             [blog for blog in blogs_with_topic_count if blog.topic_count > 1]
         )
+
+    def test_get_topic_by_u1(self):
+        topics_by_u1 = list(Topic.objects.filter(author__first_name='u1'))
+        self.assertEqual(get_topic_by_u1(), topics_by_u1)
