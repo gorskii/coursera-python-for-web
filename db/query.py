@@ -85,7 +85,12 @@ def get_avg_topic_count():
 
 
 def get_blog_that_have_more_than_one_topic():
-    pass
+    """Return blogs that have more than one topic"""
+    return list(
+        Blog.objects
+            .annotate(topic_count=Count('topic'))
+            .filter(topic_count__gt=1)
+    )
 
 
 def get_topic_by_u1():

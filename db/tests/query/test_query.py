@@ -16,6 +16,7 @@ from db.query import (
     get_user_with_limit,
     get_topic_count,
     get_avg_topic_count,
+    get_blog_that_have_more_than_one_topic,
 )
 
 
@@ -132,3 +133,12 @@ class TestQuery(TestCase):
                 / len(topic_counts)
         )
         self.assertEqual(get_avg_topic_count()['avg'], avg_topic_count)
+
+    def test_get_blog_that_have_more_than_one_topic(self):
+        blogs_with_topic_count = (
+            Blog.objects.annotate(topic_count=Count('topic'))
+        )
+        self.assertEqual(
+            get_blog_that_have_more_than_one_topic(),
+            [blog for blog in blogs_with_topic_count if blog.topic_count > 1]
+        )
