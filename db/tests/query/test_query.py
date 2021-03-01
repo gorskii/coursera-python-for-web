@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.db.models import Count
 from django.test import TestCase
 from pytz import UTC
 
@@ -14,6 +15,7 @@ from db.query import (
     get_topic_title_ended,
     get_user_with_limit,
     get_topic_count,
+    get_avg_topic_count,
 )
 
 
@@ -122,3 +124,11 @@ class TestQuery(TestCase):
             [blog.topic_count for blog in get_topic_count()],
             sorted([blog1_topic_count, blog2_topic_count])
         )
+
+    def test_get_avg_topic_count(self):
+        topic_counts = Blog.objects.annotate(topic_count=Count('topic'))
+        avg_topic_count = (
+                sum(blog.topic_count for blog in topic_counts)
+                / len(topic_counts)
+        )
+        self.assertEqual(get_avg_topic_count()['avg'], avg_topic_count)

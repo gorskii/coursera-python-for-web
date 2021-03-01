@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from django.db.models import Count
+from django.db.models import Count, Avg
 from pytz import UTC
 
 from db.models import User, Blog, Topic
@@ -78,7 +78,10 @@ def get_topic_count():
 
 
 def get_avg_topic_count():
-    pass
+    """Return average topic count for blog"""
+    return (Blog.objects
+            .annotate(topic_count=Count('topic'))
+            .aggregate(avg=Avg('topic_count')))
 
 
 def get_blog_that_have_more_than_one_topic():
