@@ -18,6 +18,7 @@ from db.query import (
     get_avg_topic_count,
     get_blog_that_have_more_than_one_topic,
     get_topic_by_u1,
+    get_user_that_dont_have_blog,
 )
 
 
@@ -147,3 +148,10 @@ class TestQuery(TestCase):
     def test_get_topic_by_u1(self):
         topics_by_u1 = list(Topic.objects.filter(author__first_name='u1'))
         self.assertEqual(get_topic_by_u1(), topics_by_u1)
+
+    def test_get_user_that_dont_have_blog(self):
+        users_without_blogs = list(User.objects.filter(blog=None))
+        self.assertEqual(
+            get_user_that_dont_have_blog(),
+            sorted(users_without_blogs, key=lambda user: user.id)
+        )

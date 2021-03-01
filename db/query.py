@@ -97,8 +97,10 @@ def get_topic_by_u1():
     """Return topics created by user with first_name u1"""
     return list(Topic.objects.filter(author__first_name='u1'))
 
+
 def get_user_that_dont_have_blog():
-    pass
+    """Return users that don't have any blogs, sorted by id"""
+    return list(User.objects.filter(blog=None).order_by('id'))
 
 
 def get_topic_that_like_all_users():
