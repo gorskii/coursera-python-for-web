@@ -109,4 +109,5 @@ def get_topic_that_like_all_users():
 
 
 def get_topic_that_dont_have_like():
-    pass
+    """Return topics that nobody liked"""
+    return list(Topic.objects.filter(likes=None))

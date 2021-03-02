@@ -20,6 +20,7 @@ from db.query import (
     get_topic_by_u1,
     get_user_that_dont_have_blog,
     get_topic_that_like_all_users,
+    get_topic_that_dont_have_like,
 )
 
 
@@ -160,3 +161,7 @@ class TestQuery(TestCase):
     def test_get_topic_that_like_all_users(self):
         topics_all_liked = list(Topic.objects.filter(likes=User.objects.all()))
         self.assertEqual(get_topic_that_like_all_users(), topics_all_liked)
+
+    def test_get_topic_that_dont_have_like(self):
+        topics_without_likes = list(Topic.objects.filter(likes=None))
+        self.assertEqual(get_topic_that_dont_have_like(), topics_without_likes)
