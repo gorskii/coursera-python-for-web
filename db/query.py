@@ -104,7 +104,8 @@ def get_user_that_dont_have_blog():
 
 
 def get_topic_that_like_all_users():
-    pass
+    """Return topics that all users liked"""
+    return list(Topic.objects.filter(likes=User.objects.all()))
 
 
 def get_topic_that_dont_have_like():
