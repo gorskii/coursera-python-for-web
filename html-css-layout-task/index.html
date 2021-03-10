@@ -2,16 +2,186 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title>Stackoverflow</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
+<nav class="navigation navigation_fixed navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navigation__container container-fluid">
+        <div class="logo navigation__logo">
+            <a class="logo logo-text navbar-brand" href="index.html">Stackoverflow</a>
+        </div>
+        <div class="search navigation__search">
+            <form class="search-form">
+                <input class="search__input form-control" type="search" placeholder="Search..." autocomplete="off"
+                       aria-label="Search" name="q">
+                <span class="icon search__icon">🔎</span>
+            </form>
+        </div>
+        <div class="auth navigation__auth">
+            <a class="link auth__login" href="#">log in</a>
+            <a class="link auth__register" href="#">register</a>
+        </div>
+    </div>
+</nav>
+<main>
+    <div class="main container">
+        <div class="row">
+            <div class="main__content col-10">
+                <div class="topic row">
+                    <div class="author col-2">
+                        <div class="avatar">
+                            <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+                                 alt="avatar" class="avatar__img">
+                        </div>
+                        <div class="rating">
+                            <div class="rating__value form-control">0</div>
+                            <div class="rating__buttons">
+                                <button class="btn button-arrow rating_vote-up">🔼</button>
+                                <button class="btn button-arrow rating_vote-down">🔽</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question col-10">
+                        <div class="question__header">
+                            <h3>How to build a moon park?</h3>
+                        </div>
+                        <div class="question__text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci aut consequatur
+                            delectus, eos eum id ipsum libero maxime natus obcaecati porro quia reiciendis sint sit
+                            suscipit tempore totam. Iure?
+                        </div>
+                        <div class="question__tags">
+                            <span class="tags-header">Tags:</span>
+                            <a class="link" href="?q=black-jack">black-jack</a>
+                            <a class="link" href="?q=bender">bender</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="answer-list">
+                    <div class="answer-list__item row">
+                        <div class="author answer-author col-2">
+                            <div class="avatar">
+                                <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+                                     alt="avatar" class="avatar__img">
+                            </div>
+                            <div class="rating">
+                                <div class="rating__value form-control">0</div>
+                                <div class="rating__buttons">
+                                    <button class="btn button-arrow rating_vote-up">🔼</button>
+                                    <button class="btn button-arrow rating_vote-down">🔽</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer-text col-10">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias atque corporis
+                            cumque dolores et eum itaque, laudantium neque officia optio placeat provident quasi qui
+                            sunt voluptate voluptatum. Dolorum, temporibus.
+                        </div>
+                    </div>
+                    <div class="answer-list__item row">
+                        <div class="author answer-author col-2">
+                            <div class="avatar">
+                                <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+                                     alt="avatar" class="avatar__img">
+                            </div>
+                            <div class="rating">
+                                <div class="rating__value form-control">0</div>
+                                <div class="rating__buttons">
+                                    <button class="btn button-arrow rating_vote-up">🔼</button>
+                                    <button class="btn button-arrow rating_vote-down">🔽</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer-text col-10">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus amet aspernatur
+                            consectetur dolore enim ex, fugiat quaerat vero! Adipisci alias assumenda autem culpa enim
+                            excepturi molestias mollitia ratione voluptate voluptatum.
+                        </div>
+                    </div>
+                    <div class="answer-list__item row">
+                        <div class="author answer-author col-2">
+                            <div class="avatar">
+                                <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+                                     alt="avatar" class="avatar__img">
+                            </div>
+                            <div class="rating">
+                                <div class="rating__value form-control">0</div>
+                                <div class="rating__buttons">
+                                    <button class="btn button-arrow rating_vote-up">🔼</button>
+                                    <button class="btn button-arrow rating_vote-down">🔽</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer-text col-10">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut dolore error fugiat id labore
+                            laudantium natus, nulla perferendis rem repudiandae sed, sint vel, voluptate? Itaque libero
+                            placeat provident tempora temporibus.
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="answer-input">
+                    <form class="answer-form">
+                        <textarea class="answer-input__text form-control" rows="3"
+                                  placeholder="Enter your answer here..." aria-label="Your answer"></textarea>
+                        <button class="answer-input__button btn btn-primary" type="submit">Answer</button>
+                    </form>
+                </div>
+            </div>
+            <div class="sidebar main__sidebar col-2">
+                <div class="top-tags sidebar__item">
+                    <div class="top-tags__header">
+                        <h5>Popular Tags</h5>
+                    </div>
+                    <div class="top-tags__list">
+                        <a class="link top-tags__link" href="?q=coursera">coursera</a>
+                        <a class="link top-tags__link" href="?q=python">python</a>
+                        <a class="link top-tags__link" href="?q=mysql">mysql</a>
+                        <a class="link top-tags__link" href="?q=django">django</a>
+                    </div>
+                </div>
+                <div class="top-users sidebar__item">
+                    <div class="top-users__header">
+                        <h5>Best Members</h5>
+                    </div>
+                    <div class="top-users__list">
+                        <a class="link top-users__link" href="#">Mr. Freeman</a>
+                        <a class="link top-users__link" href="#">Dr. House</a>
+                        <a class="link top-users__link" href="#">Bender</a>
+                        <a class="link top-users__link" href="#">Queen Victoria</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
-<div class="alert alert-primary" role="alert">Test</div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+<script>
+    window.onload = () => {
+        let ratings = document.getElementsByClassName('rating');
+        for (let r of ratings) {
+            let buttons = r.getElementsByClassName('rating__buttons')[0].children;
+            let val = r.getElementsByClassName('rating__value')[0];
+            for (let b of buttons) {
+                b.onclick = () => {
+                    b.className.includes('rating_vote-up') ? val.textContent++ : val.textContent--;
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
