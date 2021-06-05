@@ -21,3 +21,15 @@ class TestViews(object):
         assert item.title == 'Сыр "Российский"'
         assert item.description == 'Очень вкусный сыр, да еще и российский.'
         assert item.price == 100
+
+    def test_invalid_json(self, client, db):
+        url = '/api/v1/goods/'
+        data = '{\
+            "title": "Сыр \\\"Российский\\\"",\
+            "description": "Очень вкусный сыр, да еще и российский.",\
+            "price": 100\
+        '
+
+        response = client.post(url, data=data, content_type='application/json')
+        assert response.status_code == 400
+        assert 'errors' in response.json()
