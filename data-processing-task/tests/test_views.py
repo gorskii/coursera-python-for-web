@@ -27,12 +27,11 @@ def invalid_item_json():
 
 
 class TestAddItemView:
+    url = '/api/v1/goods/'
 
     def test_post_item(self, client, valid_item_json):
         """/api/v1/goods/ (POST) сохраняет товар в базе."""
-
-        url = '/api/v1/goods/'
-        response = client.post(url, data=valid_item_json,
+        response = client.post(self.url, data=valid_item_json,
                                content_type='application/json')
 
         assert response.status_code == 201
@@ -43,8 +42,7 @@ class TestAddItemView:
         assert item.price == 100
 
     def test_invalid_json_not_processed(self, client, invalid_item_json):
-        url = '/api/v1/goods/'
-        response = client.post(url, data=invalid_item_json,
+        response = client.post(self.url, data=invalid_item_json,
                                content_type='application/json')
 
         assert response.status_code == 400
@@ -52,24 +50,24 @@ class TestAddItemView:
         assert not Item.objects.all().exists()
 
     def test_zero_price_is_not_valid(self, client):
-        url = '/api/v1/goods/'
         data = json.dumps({
             'title': 'Zero-priced item',
             'description': 'test item description',
             'price': 0,
         })
-        response = client.post(url, data=data, content_type='application/json')
+        response = client.post(self.url, data=data,
+                               content_type='application/json')
 
         assert response.status_code == 400
 
     def test_too_big_price_is_not_valid(self, client):
-        url = '/api/v1/goods/'
         data = json.dumps({
             'title': 'Too expensive item',
             'description': 'test item description',
             'price': 1_000_001,
         })
-        response = client.post(url, data=data, content_type='application/json')
+        response = client.post(self.url, data=data,
+                               content_type='application/json')
 
         assert response.status_code == 400
 
