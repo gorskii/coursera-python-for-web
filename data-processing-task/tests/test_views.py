@@ -72,4 +72,34 @@ class TestAddItemView:
         assert response.status_code == 400
 
     def test_empty_title_is_not_valid(self, client):
-        pass
+        data = json.dumps({
+            'title': '',
+            'description': 'item with empty title',
+            'price': 100,
+        })
+        response = client.post(self.url, data=data,
+                               content_type='application/json')
+
+        assert response.status_code == 400
+
+    def test_too_long_title_is_not_valid(self, client):
+        data = json.dumps({
+            'title': 'Very-very-very-very long, exactly one character longer than limit',
+            'description': 'test item with a too long title',
+            'price': 100,
+        })
+        response = client.post(self.url, data=data,
+                               content_type='application/json')
+
+        assert response.status_code == 400
+
+    def test_empty_description_is_not_valid(self, client):
+        data = json.dumps({
+            'title': 'Item with an empty description',
+            'description': '',
+            'price': 100,
+        })
+        response = client.post(self.url, data=data,
+                               content_type='application/json')
+
+        assert response.status_code == 400
