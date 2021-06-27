@@ -1,5 +1,6 @@
 import json
 
+from django.db import IntegrityError
 import pytest
 
 from somemart.models import Item, Review
@@ -103,3 +104,55 @@ class TestAddItemView:
                                content_type='application/json')
 
         assert response.status_code == 400
+
+    def test_too_long_description_is_not_valid(self, client):
+        data = json.dumps({
+            'title': 'Item with a very long description',
+            'description': 'a' * 1025,
+            'price': 100,
+        })
+        response = client.post(self.url, data=data,
+                               content_type='application/json')
+
+        assert response.status_code == 400
+
+    def test_item_with_properties_of_maximum_size_is_saved(self, client):
+        data = json.dumps({
+            'title': 't' * 64,
+            'description': 'd' * 1024,
+            'price': 1_000_000,
+        })
+        response = client.post(self.url, data=data,
+                               content_type='application/json')
+
+        assert response.status_code == 201
+
+        document = response.json()
+        item = Item.objects.get(pk=document['id'])
+        assert item.title == 't' * 64
+        assert item.description == 'd' * 1024
+        assert item.price == 1_000_000
+
+    @pytest.mark.parametrize(
+        'given_json,expected_status_code',
+        [
+            ({'title': 't', 'description': 'd'}, 400),
+            ({'description': 'd', 'price': 1}, 400),
+            ({'title': 't', 'price': 1}, 400),
+            ({'title': 't'}, 400),
+        ]
+    )
+    def test_item_with_any_property_missed_is_not_valid(
+            self,
+            client,
+            given_json,
+            expected_status_code
+    ):
+        data = json.dumps(given_json)
+        try:
+            response = client.post(self.url, data=data,
+                                   content_type='application/json')
+        except IntegrityError:
+            pytest.xfail("Attempted to save an item without prior validation")
+
+        assert response.status_code == expected_status_code
