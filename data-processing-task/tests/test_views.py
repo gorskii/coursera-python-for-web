@@ -47,7 +47,6 @@ class TestAddItemView:
                                content_type='application/json')
 
         assert response.status_code == 400
-        assert 'errors' in response.json()
         assert not Item.objects.all().exists()
 
     def test_zero_price_is_not_valid(self, client):
