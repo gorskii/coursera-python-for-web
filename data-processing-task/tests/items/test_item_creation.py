@@ -1,31 +1,11 @@
 import json
 
-from django.db import IntegrityError
 import pytest
+from django.db import IntegrityError
 
-from somemart.models import Item, Review
+from somemart.models import Item
 
-pytestmark = pytest.mark.django_db
-
-
-@pytest.fixture
-def valid_item_json():
-    return json.dumps({
-        'title': 'Сыр "Российский"',
-        'description': 'Очень вкусный сыр, да еще и российский.',
-        'price': 100
-    })
-
-
-@pytest.fixture
-def invalid_item_json():
-    return '\
-        {\
-            "title": "Сыр \\\"Российский\\\"",\
-            "description": "Очень вкусный сыр, да еще и российский.",\
-            "price": 100\
-    '
-
+pytestmark = [pytest.mark.django_db]
 
 class TestAddItemView:
     url = '/api/v1/goods/'
